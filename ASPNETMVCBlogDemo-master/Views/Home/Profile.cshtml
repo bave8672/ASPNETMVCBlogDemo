@@ -1,0 +1,19 @@
+﻿@model MVCBlogDemo.Models.ApplicationUserInfo
+
+<h1>@Html.DisplayFor(m => m.DisplayName)</h1>
+<p>@Html.DisplayFor(m => m.Bio)</p>
+@if (Model.ApplicationUser.Id == @User.Identity.Name)
+{
+    <a href="~/UserInfo/Edit">Edit my info</a>
+}
+<hr />
+
+@foreach (var item in Model.ApplicationUser.Posts)
+{
+    <article>
+        <p>@Html.DisplayFor(modelItem => item.Author.UserInfo.DisplayName) @Html.DisplayFor(modelItem => item.Date)</p>
+        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+        <div class="postContent">@Html.Raw(item.Render)</div>
+    </article>
+    <hr />
+}

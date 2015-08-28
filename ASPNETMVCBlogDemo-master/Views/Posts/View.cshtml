@@ -1,0 +1,11 @@
+﻿@model MVCBlogDemo.Models.Post
+
+@{
+    ViewBag.Title = "View";
+}
+<br/>
+<article class="post">
+    <p><a href="~/User/Profile/@Model.Author.Id">@Model.Author.UserInfo.DisplayName</a> @Model.Date</p>
+    <h1>@Model.Title</h1>
+    <div class="postContent">@Html.Raw(Model.Render)</div>
+</article>

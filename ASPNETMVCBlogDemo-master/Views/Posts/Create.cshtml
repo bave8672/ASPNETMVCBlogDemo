@@ -1,0 +1,54 @@
+﻿@model MVCBlogDemo.Models.Post
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Post</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Title, new { @class = "titleInput col-md-5" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Content, new { @class = "mdInput", @rows = "20", @cols = "80" })
+                @Html.ValidationMessageFor(model => model.Content)
+                Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images">Markdown</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+        <div class="control-label col-md-2">
+            Preview
+        </div>
+        <div class="col-md-10">
+            <h1 class="titleOutput"></h1>
+            <div class="mdPreview"></div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Url.Content("/Scripts/MarkdownDeepLib.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/MarkdownPreview.js")"></script>
+}

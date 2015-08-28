@@ -1,0 +1,13 @@
+﻿@model IEnumerable<MVCBlogDemo.Models.Post>
+
+@foreach (var item in Model)
+{
+    <hr />
+    <article class="post post-preview">
+        <p>@Html.ActionLink(@item.Author.UserInfo.DisplayName, "Profile", "User", new { id = @item.Author.Id }, null) , @Html.DisplayFor(modelItem => item.Date)</p>
+        <a href="~/Posts/View/@item.Id">
+            <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+            <div class="postContent">@Html.Raw(item.RenderPreview)</div>
+        </a>
+    </article>
+}

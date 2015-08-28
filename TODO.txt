@@ -1,0 +1,19 @@
+UserInfo Model:
+	- Avatar support
+	- Friends Support
+	- Liking posts
+
+Posts Model
+	- Tags
+	- Likes
+	- Detect profanity ? 
+
+Functionality
+	- Search page
+	- Likes / friends ajax
+	- Similar posts partial
+	- Featured Partial
+
+Moderation
+	- Admin page
+	- Admin role can CRUD all posts, users

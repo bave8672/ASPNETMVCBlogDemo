@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MVCBlogDemo.Models.Post>
+
+<div class="postsContent">
+    <h1>Search Results</h1>
+    <div class="postsContent">
+        @foreach (var item in Model)
+        {
+            <hr />
+            <article class="post post-preview">
+                <p>@Html.ActionLink(@item.Author.UserInfo.DisplayName, "Profile", "User", new { id = @item.Author.Id }, null) , @Html.DisplayFor(modelItem => item.Date)</p>
+                <a href="~/Posts/View/@item.Id">
+                    <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                    <div class="postContent">@Html.Raw(item.RenderPreview)</div>
+                </a>
+            </article>
+        }
+    </div>
+    <nav>
+        <ul class="pager">
+            <li class="@ViewBag.prevClass">@Html.ActionLink("Previous", "", new { q = ViewBag.q, ofs = Math.Max(0, ViewBag.ofs - 5) } )</li>
+            <li class="@ViewBag.nextClass">@Html.ActionLink("Next", "", new { q = ViewBag.q, ofs = ViewBag.ofs + 5 } )</li>
+        </ul>
+    </nav>
+</div>
