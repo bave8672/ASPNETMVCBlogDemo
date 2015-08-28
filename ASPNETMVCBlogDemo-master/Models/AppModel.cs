@@ -27,7 +27,8 @@ namespace MVCBlogDemo.Models
         public string LastName { get; set; }
 
         public string Bio { get; set; }
-        public byte[] Avatar { get; set; }
+        public int AvatarId {get; set; }
+        public Image Avatar { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
 
@@ -42,6 +43,16 @@ namespace MVCBlogDemo.Models
                 return fullName;
             }
         }
+    }
+
+    public class Image
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Size { get; set; }
+        public byte[] Content { get; set; }
+        public int ApplicationUserInfoId { get; set; }
+        public ApplicationUserInfo ApplicationUserInfo { get; set; }
     }
 
     public class Post
@@ -102,6 +113,11 @@ namespace MVCBlogDemo.Models
                 .HasRequired(i => i.ApplicationUser)
                 .WithRequiredDependent(u => u.UserInfo);
 
+            modelBuilder.Entity<ApplicationUserInfo>()
+                .HasOptional(i => i.Avatar)
+                .WithOptionalPrincipal(a => a.ApplicationUserInfo);
+
+
             // Change the name of the table to be Users instead of AspNetUsers
             modelBuilder.Entity<IdentityUser>()
                 .ToTable("Users");
@@ -111,6 +127,7 @@ namespace MVCBlogDemo.Models
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<ApplicationUserInfo> ApplicationUserInfoes { get; set; }
+        public DbSet<Image> Images { get; set; }
     }
 
 

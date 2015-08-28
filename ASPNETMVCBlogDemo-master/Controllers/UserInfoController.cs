@@ -4,12 +4,14 @@ using MVCBlogDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MVCBlogDemo.Controllers
 {
+    [Authorize]
     public class UserInfoController : Controller
     {
         private ApplicationDbContext db;
@@ -31,27 +33,59 @@ namespace MVCBlogDemo.Controllers
         // GET
         public ActionResult Edit()
         {
-            var info = getUserInfo();
-            return View(info);
+            var userInfo = getUserInfo();
+            var model = new UserInfoEditModel { info = userInfo };
+            return View(model);
         }
 
         // POST
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Bio, Avatar")] ApplicationUserInfo info)
+        public ActionResult Edit(UserInfoEditModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(info).State = EntityState.Modified;
+                // Handle image upload
+                if (model.file != null && model.file.ContentLength > 0)
+                {
+                    // Delete old image
+                    var thisUser = db.ApplicationUserInfoes.AsNoTracking().Where(i => i.Id == model.info.Id).Include(i => i.Avatar).FirstOrDefault();
+                    Image oldAvatar = new Image();
+                    if (thisUser.Avatar != null)
+                    {
+                        oldAvatar = db.Images.Where(i => i.Id == thisUser.Avatar.Id).First();
+                    }
+                    if (oldAvatar.Content != null)
+                    {
+                        db.Images.Remove(oldAvatar);
+                        db.SaveChanges();
+                    }
+
+                    // Read image data
+                    Image Avatar = new Image();
+                    Avatar.Size = model.file.ContentLength;
+                    Avatar.Name = model.file.FileName;
+                    Stream fileStream = model.file.InputStream;
+                    byte[] imageBytes = new byte[fileStream.Length];
+                    fileStream.Read(imageBytes, 0, imageBytes.Length);
+                    Avatar.Content = imageBytes;
+
+                    // Update database
+                    db.Images.Add(Avatar);
+                    model.info.Avatar = Avatar;
+                }
+
+                db.Entry(model.info).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(info);
+            return View(model.info);
         }
 
         private ApplicationUserInfo getUserInfo()
         {
             string id = User.Identity.GetUserId();
             var info = db.ApplicationUserInfoes
+                .Include(i => i.Avatar)
                 .Where(i => i.ApplicationUser.Id == id)
                 .FirstOrDefault();
             return info;

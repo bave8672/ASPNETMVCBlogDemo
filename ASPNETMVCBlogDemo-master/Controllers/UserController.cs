@@ -27,14 +27,18 @@ namespace MVCBlogDemo.Controllers
             if (String.IsNullOrEmpty(id))
             {
                 id = User.Identity.GetUserId();
+            }
+            if (id == User.Identity.GetUserId())
+            {
                 ViewBag.isCurrentUser = true;
             }
-            var user = db.ApplicationUserInfoes
+            var userInfo = db.ApplicationUserInfoes
                 .Include(info => info.ApplicationUser)
                 .Include(info => info.ApplicationUser.Posts)
                 .Where(info => info.ApplicationUser.Id == id)
                 .FirstOrDefault();
-            return View(user);
+
+            return View(userInfo);
         }
     }
 }

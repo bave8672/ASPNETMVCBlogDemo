@@ -145,5 +145,5 @@ C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\Ver
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.csprojResolveAssemblyReference.cache
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.dll
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.pdb
-C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.initial.resources
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.init.resources
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.csproj.GenerateResource.Cache

@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string imageBase64 = Convert.ToBase64String(Model.Avatar.Content);
+    string imageSrc = string.Format("data:image/jpeg;base64,{0}", imageBase64);
 }
 
 <h2>View</h2>
@@ -40,7 +43,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Avatar)
+            @Html.Image(Model.Avatar.Content)
         </dd>
 
     </dl>
