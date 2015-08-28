@@ -44,6 +44,20 @@ div.postsPartial > article > a > div {
     pointer-events: none;
 }
 
+.searchPartial {
+    display: inline-block;
+}
+.searchPartial > * {
+    display: inline;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-radius: 50%;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;

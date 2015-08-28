@@ -44,6 +44,7 @@ namespace MVCBlogDemo.Controllers
             Post post = await db.Posts
                 .Include(p => p.Author)
                 .Include(p => p.Author.UserInfo)
+                .Include(p => p.Author.UserInfo.Avatar)
                 .FirstOrDefaultAsync(p => p.Id == id);
             if (post == null || post.Author == null) // just in case post/ author no longer exists
             {
@@ -164,6 +165,7 @@ namespace MVCBlogDemo.Controllers
             var posts = db.Posts
                 .Include(post => post.Author)
                 .Include(post => post.Author.UserInfo)
+                .Include(post => post.Author.UserInfo.Avatar)
                 .OrderByDescending(post => post.Date)
                 .Skip(ofs)
                 .Take(5) // Take 5 posts each time

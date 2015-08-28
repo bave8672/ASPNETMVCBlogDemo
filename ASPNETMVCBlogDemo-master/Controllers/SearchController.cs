@@ -50,6 +50,7 @@ namespace MVCBlogDemo.Controllers
             var allPosts = db.Posts
                 .Include(p => p.Author)
                 .Include(p => p.Author.UserInfo)
+                .Include(p => p.Author.UserInfo.Avatar)
                 .ToList();
 
             var searchResults = new List<SearchResult>();
