@@ -4,7 +4,7 @@
     ViewBag.Title = "Profile for " + Model.DisplayName;
 }
 
-<h1>@Html.DisplayFor(m => m.DisplayName)</h1>
+<h1>@Html.Image(Model.Avatar.Content, new { @class = "avatar" }) @Html.DisplayFor(m => m.DisplayName)</h1>
 <p>@Html.DisplayFor(m => m.Bio)</p>
 @if (ViewBag.isCurrentUser == true)
 {

@@ -47,6 +47,7 @@
             @Html.LabelFor(model => model.info.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" name="file" />
+                <span class="error">@ViewBag.customError</span>
             </div>
         </div>
 

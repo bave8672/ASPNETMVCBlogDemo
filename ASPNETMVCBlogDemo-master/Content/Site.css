@@ -58,6 +58,10 @@ div.postsPartial > article > a > div {
     border-radius: 50%;
 }
 
+.error {
+    color: red;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;

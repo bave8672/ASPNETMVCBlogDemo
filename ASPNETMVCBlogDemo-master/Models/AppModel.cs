@@ -50,7 +50,18 @@ namespace MVCBlogDemo.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Size { get; set; }
-        public byte[] Content { get; set; }
+        private byte[] _content;
+
+        // Return default image if none exists
+        public byte[] Content
+        {
+            get
+            {
+                if (_content != null && _content.Length > 0) { return _content; }
+                return System.IO.File.ReadAllBytes(System.Web.HttpRuntime.AppDomainAppPath + "/Content/Images/user-placeholder.jpg");
+            }
+            set { _content = value; }
+        }
         public int ApplicationUserInfoId { get; set; }
         public ApplicationUserInfo ApplicationUserInfo { get; set; }
     }

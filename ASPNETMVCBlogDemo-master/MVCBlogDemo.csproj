@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201508280828473_init.Designer.cs">
       <DependentUpon>201508280828473_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508290526084_defaultuseravatar.cs" />
+    <Compile Include="Migrations\201508290526084_defaultuseravatar.Designer.cs">
+      <DependentUpon>201508290526084_defaultuseravatar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -197,6 +201,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\ajax-loader.gif" />
+    <Content Include="Content\Images\user-placeholder.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -256,7 +261,6 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\ClaimsIdentityFactory\Index.cshtml" />
     <Content Include="Views\Validation\Index.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
@@ -315,6 +319,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201508280828473_init.resx">
       <DependentUpon>201508280828473_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508290526084_defaultuseravatar.resx">
+      <DependentUpon>201508290526084_defaultuseravatar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

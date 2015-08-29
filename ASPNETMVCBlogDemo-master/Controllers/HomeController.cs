@@ -29,19 +29,6 @@ namespace MVCBlogDemo.Controllers
             return View();
         }
 
-        public ActionResult Profile()
-        {
-            // Get the current logged in User and look up the user in ASP.NET Identity
-            string userId = User.Identity.GetUserId().ToString();
-            var user = db.ApplicationUserInfoes
-                .Include(info => info.ApplicationUser)
-                .Include(info => info.ApplicationUser.Posts)
-                .Where(info => info.ApplicationUser.Id == userId)
-                .First();
-            return View(user);
-        }
-
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

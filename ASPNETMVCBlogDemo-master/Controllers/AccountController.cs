@@ -84,6 +84,8 @@ namespace MVCBlogDemo.Controllers
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
                 user.UserInfo = new ApplicationUserInfo { ApplicationUser = user };
+                Image defaultAvatar = new Image { Name = "defaultAvatar" };
+                user.UserInfo.Avatar = defaultAvatar;
                 db.SaveChanges();
                 var result = await UserManager.CreateAsync(user, model.Password);
                 

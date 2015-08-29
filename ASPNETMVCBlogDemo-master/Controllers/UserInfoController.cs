@@ -31,10 +31,11 @@ namespace MVCBlogDemo.Controllers
         }
 
         // GET
-        public ActionResult Edit()
+        public ActionResult Edit(string customError = "")
         {
             var userInfo = getUserInfo();
             var model = new UserInfoEditModel { info = userInfo };
+            ViewBag.customError = customError;
             return View(model);
         }
 
@@ -47,6 +48,12 @@ namespace MVCBlogDemo.Controllers
                 // Handle image upload
                 if (model.file != null && model.file.ContentLength > 0)
                 {
+                    // Validate filesize
+                    if (model.file.ContentLength > 6E5)
+                    {
+                        return RedirectToRoute(new { controller = "UserInfo", Action = "Edit", customError = "File is over 600kb" });
+                    }
+
                     // Delete old image
                     var thisUser = db.ApplicationUserInfoes.AsNoTracking().Where(i => i.Id == model.info.Id).Include(i => i.Avatar).FirstOrDefault();
                     Image oldAvatar = new Image();
@@ -78,7 +85,7 @@ namespace MVCBlogDemo.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(model.info);
+            return View(model);
         }
 
         private ApplicationUserInfo getUserInfo()
