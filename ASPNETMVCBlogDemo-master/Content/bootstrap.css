@@ -322,17 +322,6 @@ textarea {
   background-image: none;
 }
 
-a {
-  color: #428bca;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #2a6496;
-  text-decoration: underline;
-}
-
 a:focus {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
@@ -3228,7 +3217,7 @@ input[type="button"].btn-block {
   float: left;
   min-width: 160px;
   padding: 5px 0;
-  margin: 2px 0 0;
+  margin: 5px;
   font-size: 14px;
   list-style: none;
   background-color: #ffffff;

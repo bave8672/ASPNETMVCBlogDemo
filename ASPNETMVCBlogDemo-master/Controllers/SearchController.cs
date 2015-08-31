@@ -87,7 +87,7 @@ namespace MVCBlogDemo.Controllers
             else
             {
                 // Split query into words
-                string[] searchTerms = Regex.Split(query, @"\s+");
+                string[] searchTerms = Regex.Split(query, @"[^\w]+");
 
                 // Weight posts according to how many matches they get with the search terms
                 foreach (Post post in allPosts)
@@ -112,11 +112,7 @@ namespace MVCBlogDemo.Controllers
                     }
 
                     // Discard irrelevant matches (unless keepAll is set to true)
-                    if (keepAll == false && searchResult.Relevance > 0)
-                    {
-                        searchResults.Add(searchResult);
-                    }
-                    else
+                    if (keepAll == true || searchResult.Relevance > 0)
                     {
                         searchResults.Add(searchResult);
                     }

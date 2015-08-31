@@ -1,10 +1,44 @@
-@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
+@import url(https://fonts.googleapis.com/css?family=Lily+Script+One);
+@import url(https://fonts.googleapis.com/css?family=EB+Garamond);
 @import url(https://fonts.googleapis.com/css?family=Abel);
 
 $vlightgrey: #f3f3f3;
 $grey: #aaaaaa;
 $darkGrey: #333333;
 $babyBlue: #00bffe;
+$blue: #759fcd;
+$green: #aee5de;
+$orange: #f5a120;
+$darkOrange: #f28f0d;
+
+.navbar-brand {
+    font-family: 'Lily Script One';
+    :hover {
+        color: $orange;
+    }
+}
+
+// Configure links
+a {
+    color: $darkOrange;
+}
+
+a:hover {
+    color: $blue;
+}
+
+ul.nav a:hover {
+    color: $blue !important;
+}
+
+a.accountDropdownButton {
+    color: $darkOrange !important;
+}
+
+.post-preview > a {
+    color: inherit;
+    text-decoration: none;
+}
 
 body {
     padding-top: 50px;
@@ -48,6 +82,7 @@ body > div.navbar {
     .searchPartial {
         position: relative;
         padding: 5px;
+        margin: 9px;
         border: 1px solid $vlightgrey;
         border-radius: 10px;
 
@@ -73,10 +108,9 @@ body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.co
     padding: 7px;
 }
 
-body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.collapse > ul > li > a {
-    :hover {
-        color: blue;
-    }
+a {
+    //color: $green;
+    text-decoration: none !important;
 }
 
 // Mobile nav toggle
@@ -84,10 +118,8 @@ body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.co
     background-color: $darkGrey;
 }
 
-body > div.navbar > div > div > ul > li > a {
-    :hover {
-        color: $babyBlue;
-    }
+#logoutForm > ul > div > li > ul {
+    list-style: square !important;
 }
 
 body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.in {
@@ -104,11 +136,6 @@ hr {
 
 .greeter {
     margin: 30px 0 30px 0;
-}
-
-.post-preview > a {
-    color: inherit;
-    text-decoration: none;
 }
 
 .disabled {

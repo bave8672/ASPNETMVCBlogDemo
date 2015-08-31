@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Profile for " + Model.DisplayName;
+    var posts = Model.ApplicationUser.Posts.OrderByDescending(p => p.Date);
 }
 
 <h1>@Html.Image(Model.Avatar.Content, new { @class = "avatar" }) @Html.DisplayFor(m => m.DisplayName)</h1>
@@ -11,11 +12,11 @@
     <a href="~/UserInfo/Edit">Edit my info</a>
 }
 
-@foreach (var item in Model.ApplicationUser.Posts)
+@foreach (var item in posts)
 {
     <hr />
     <article>
-        <p>@Html.DisplayFor(modelItem => item.Date)</p>
+        <p>@Html.DisplayFor(modelItem => item.TimeFromNow)</p>
         <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
         <div class="postContent">@Html.Raw(item.Render)</div>
     </article>
