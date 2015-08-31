@@ -1,5 +1,4 @@
 UserInfo Model:
-	- Avatar support
 	- Friends Support
 	- Liking posts
 
@@ -9,7 +8,6 @@ Posts Model
 	- Detect profanity ? 
 
 Functionality
-	- Search page
 	- Likes / friends ajax
 	- Similar posts partial
 	- Featured Partial

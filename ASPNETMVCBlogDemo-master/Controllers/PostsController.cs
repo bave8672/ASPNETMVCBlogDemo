@@ -42,6 +42,7 @@ namespace MVCBlogDemo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = await db.Posts
+                .Include(p => p.Tags)
                 .Include(p => p.Author)
                 .Include(p => p.Author.UserInfo)
                 .Include(p => p.Author.UserInfo.Avatar)
@@ -78,12 +79,27 @@ namespace MVCBlogDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content")] Post post)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content,Tags")] Post post, string tagString)
         {
             var currentUser = await userManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (ModelState.IsValid)
             {
+                post.Tags = new List<Tag>();
+                // Add tags
+                if (!String.IsNullOrEmpty(tagString))
+                {
+                    string[] _tags = Regex.Split(tagString, @"[^\w]+");
+                    var uniqTags = new List<string>();
+                    foreach(string tag in _tags)
+                    {
+                        if (!uniqTags.Contains(tag))
+                        {
+                            uniqTags.Add(tag);
+                            post.Tags.Add(new Tag { Name = tag, Post = post });
+                        }
+                    }
+                }
                 post.Author = currentUser;
                 post.Date = System.DateTime.UtcNow;
                 db.Posts.Add(post);

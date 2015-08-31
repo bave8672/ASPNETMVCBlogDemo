@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\HtmlExtensions.cs" />
+    <Compile Include="App_Code\Utils.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -187,6 +188,14 @@
     <Compile Include="Migrations\201508290526084_defaultuseravatar.Designer.cs">
       <DependentUpon>201508290526084_defaultuseravatar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508300009324_tags.cs" />
+    <Compile Include="Migrations\201508300009324_tags.Designer.cs">
+      <DependentUpon>201508300009324_tags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508300045373_tags1.cs" />
+    <Compile Include="Migrations\201508300045373_tags1.Designer.cs">
+      <DependentUpon>201508300045373_tags1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -205,10 +214,13 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Styles\Site.css">
+      <DependentUpon>Site.scss</DependentUpon>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Styles\Site.scss" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -276,6 +288,8 @@
     <Content Include="Views\UserInfo\Edit.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Posts\_TagsPartial.cshtml" />
+    <Content Include="Views\Search\_RelevantPostsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,6 +336,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508290526084_defaultuseravatar.resx">
       <DependentUpon>201508290526084_defaultuseravatar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508300009324_tags.resx">
+      <DependentUpon>201508300009324_tags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508300045373_tags1.resx">
+      <DependentUpon>201508300045373_tags1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

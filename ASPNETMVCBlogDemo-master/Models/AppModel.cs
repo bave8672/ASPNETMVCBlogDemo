@@ -77,8 +77,9 @@ namespace MVCBlogDemo.Models
         [StringLength(10000)]
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
-
+        public ICollection<Tag> Tags { get; set; }
         public DateTime Date { get; set; }
+        public string TimeFromNow { get { return MVCBlogDemo.App_Code.Utils.GetTimeSpan(Date); } }
 
         public ApplicationUser Author { get; set; }
 
@@ -103,6 +104,13 @@ namespace MVCBlogDemo.Models
                 return content;
             }
         }
+    }
+
+    public class Tag
+    {
+        public int Id { get; set; }
+        public Post Post { get; set; }
+        public string Name { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

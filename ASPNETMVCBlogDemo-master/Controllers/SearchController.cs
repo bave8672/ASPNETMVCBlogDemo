@@ -31,23 +31,44 @@ namespace MVCBlogDemo.Controllers
             // Data for pagination
             ViewBag.q = q;
             ViewBag.ofs = ofs;
-            var results = searchPosts(q, ofs);
+            var results = searchPosts(q, ofs, false);
             if (ofs == 0) { ViewBag.prevClass = "disabled"; } else { ViewBag.prevClass = ""; }
             if (results.Count < 5) { ViewBag.nextClass = "disabled"; } else { ViewBag.nextClass = ""; }
             return View(results);
         }
 
-        // Private class for the search method below
+        // GET: 3 Relevant posts
+        public ActionResult _RelevantPostsPartial(Post post)
+        {
+            IEnumerable<Post> results;
+            if (post.Tags != null && post.Tags.Any())
+            {
+                string q = "";
+                foreach (Tag tag in post.Tags)
+                {
+                    q += tag.Name + ",";
+                }
+                results = searchPosts(q, 0, true);
+            }
+            else
+            {
+                results = searchPosts(post.Title, 0, true);
+            }
+            return PartialView("_RelevantPostsPartial", results.Where(p => p.Id != post.Id).Take(3));
+        }
+
+        // Class for the search method below
         private class SearchResult
         {
             public Post Post { get; set; }
             public int Relevance { get; set; }
         }
 
-        private List<Post> searchPosts(string query, int ofs)
+        private List<Post> searchPosts(string query, int ofs, bool? keepAll)
         {
             // Get all posts
             var allPosts = db.Posts
+                .Include(p => p.Tags)
                 .Include(p => p.Author)
                 .Include(p => p.Author.UserInfo)
                 .Include(p => p.Author.UserInfo.Avatar)
@@ -75,12 +96,27 @@ namespace MVCBlogDemo.Controllers
                     foreach (string term in searchTerms)
                     {
                         string t = "(?i)" + term + "(?-i)"; // Ignores capitalisation
+
+                        // Match query in title and content
                         searchResult.Relevance += Regex.Matches(post.Title, t).Count;
                         searchResult.Relevance += Regex.Matches(post.Content, t).Count;
+
+                        // Match query in tags (and weight them more heavily)
+                        foreach (Tag tag in post.Tags)
+                        {
+                            if (Regex.IsMatch(tag.Name, t))
+                            {
+                                searchResult.Relevance += 10;
+                            }
+                        }
                     }
 
-                    // Discard irrelevant matches
-                    if (searchResult.Relevance > 0)
+                    // Discard irrelevant matches (unless keepAll is set to true)
+                    if (keepAll == false && searchResult.Relevance > 0)
+                    {
+                        searchResults.Add(searchResult);
+                    }
+                    else
                     {
                         searchResults.Add(searchResult);
                     }

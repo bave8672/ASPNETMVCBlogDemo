@@ -1,0 +1,199 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
+@import url(https://fonts.googleapis.com/css?family=Abel);
+
+$vlightgrey: #f3f3f3;
+$grey: #aaaaaa;
+$darkGrey: #333333;
+$babyBlue: #00bffe;
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    word-wrap: break-word;
+    font-family: "Abel";
+}
+
+.postTitle, .postContent {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 100%;
+    display: block;
+}
+
+/* Custom for BlogDemo*/
+
+body > div.navbar {
+    border-color: $vlightgrey;
+    background-color: white;
+    //font-family: "Josefin Sans" !important;
+    li > a {
+        color: $grey;
+
+        :hover {
+            color: $babyBlue;
+        }
+    }
+
+    .searchPartial {
+        position: relative;
+        padding: 5px;
+        border: 1px solid $vlightgrey;
+        border-radius: 10px;
+
+        input {
+            border: none;
+            top: 0;
+        }
+
+        button {
+            background-color: white !important;
+            border: none !important;
+            border-radius: 5px;
+        }
+    }
+
+    a.accountDropdownButton {
+        cursor: pointer;
+    }
+}
+
+// Search box
+body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.collapse > ul:nth-child(1) > li:nth-child(3) > a {
+    padding: 7px;
+}
+
+body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.collapse > ul > li > a {
+    :hover {
+        color: blue;
+    }
+}
+
+// Mobile nav toggle
+.navbar-toggle {
+    background-color: $darkGrey;
+}
+
+body > div.navbar > div > div > ul > li > a {
+    :hover {
+        color: $babyBlue;
+    }
+}
+
+body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.in {
+    border-color: $vlightgrey;
+}
+
+hr {
+    border-color: $vlightgrey;
+}
+
+.mdPreview {
+    max-width: 100%;
+}
+
+.greeter {
+    margin: 30px 0 30px 0;
+}
+
+.post-preview > a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.searchPartial {
+    display: inline-block;
+}
+
+.searchPartial > * {
+    display: inline;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-radius: 50%;
+}
+
+.error {
+    color: red;
+}
+
+.tagsPartial {
+    display: inline-flex;
+}
+
+.tagsPartial > .tagsTitle {
+    padding: 2px;
+    margin: 3px;
+    font-weight: bold;
+}
+
+.tagsPartial > .tag {
+    padding: 2px;
+    margin: 3px;
+}
+
+.relevantPostsPartial {
+    padding: 5px;
+}
+
+.relevantPostsPartial > a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.relevantPostsPartial > .flex > div.post.post-preview {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.flex {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row; /* works with row or column */
+    flex-direction: row;
+    -webkit-justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}

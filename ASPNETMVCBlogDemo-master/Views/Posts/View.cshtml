@@ -5,7 +5,12 @@
 }
 <br/>
 <article class="post">
-    <p>@Html.Image(Model.Author.UserInfo.Avatar.Content, new { width = 100, height = 100, @class = "avatar" })<a href="~/User/Profile/@Model.Author.Id">@Model.Author.UserInfo.DisplayName</a> @Model.Date</p>
-    <h1>@Model.Title</h1>
+    <p>@Html.Image(Model.Author.UserInfo.Avatar.Content, new { @class = "avatar" })<a href="~/User/Profile/@Model.Author.Id">@Model.Author.UserInfo.DisplayName</a> @Model.TimeFromNow</p>
+    <h1 class="postTitle">@Model.Title</h1>
     <div class="postContent">@Html.Raw(Model.Render)</div>
+    @Html.Partial("_TagsPartial", Model.Tags)
 </article>
+
+<hr />
+
+@{ Html.RenderAction("_RelevantPostsPartial", "Search", new { post = Model }); }
