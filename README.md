@@ -9,3 +9,4 @@ A blogsite demo.
 - Admin role that is authorised to remove blogs, users.
 - Minimal custom bootstrap UI
 - Lazy loading via AJAX on the front page
+- Searching
