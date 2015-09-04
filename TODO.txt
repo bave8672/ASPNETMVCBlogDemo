@@ -1,17 +1,19 @@
-UserInfo Model:
-	- Friends Support
-	- Liking posts
-
-Posts Model
-	- Tags
-	- Likes
-	- Detect profanity ? 
+Model
+	- Add date to favourites model - score posts according to  favourites and date
 
 Functionality
-	- Likes / friends ajax
-	- Similar posts partial
-	- Featured Partial
+	- Disable liking if user is not logged in
+	- Users can edit/delete own posts
+	- Featured Partial using high scoring posts
+	- Clean up admin pages, provide more nav links back to admin
+	- Admin account sees "Admin" navlink in login 
+	- Favourites partial
 
-Moderation
-	- Admin page
-	- Admin role can CRUD all posts, users
+Production
+	- Clean up unused views, actions
+	- Change settings for production mode
+	- Host somewhere
+
+Buglist
+	- AJAX on scroll never stops calling on homepage
+	- 

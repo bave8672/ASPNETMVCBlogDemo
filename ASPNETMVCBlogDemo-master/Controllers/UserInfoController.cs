@@ -39,6 +39,15 @@ namespace MVCBlogDemo.Controllers
             return View(model);
         }
 
+        // GET
+        public ActionResult EditPartial(string customError = "")
+        {
+            var userInfo = getUserInfo();
+            var model = new UserInfoEditModel { info = userInfo };
+            ViewBag.customError = customError;
+            return PartialView("_EditProfileInfoPartial", model);
+        }
+
         // POST
         [HttpPost]
         public ActionResult Edit(UserInfoEditModel model)
@@ -51,7 +60,7 @@ namespace MVCBlogDemo.Controllers
                     // Validate filesize
                     if (model.file.ContentLength > 6E5)
                     {
-                        return RedirectToRoute(new { controller = "UserInfo", Action = "Edit", customError = "File is over 600kb" });
+                        return RedirectToRoute(new { controller = "UserInfo", Action = "Edit", customError = "File must be under 600kb" });
                     }
 
                     // Delete old image

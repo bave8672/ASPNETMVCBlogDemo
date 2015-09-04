@@ -5,19 +5,17 @@
     var posts = Model.ApplicationUser.Posts.OrderByDescending(p => p.Date);
 }
 
-<h1>@Html.Image(Model.Avatar.Content, new { @class = "avatar" }) @Html.DisplayFor(m => m.DisplayName)</h1>
+<h1>
+    <a href="~/User/Profile/@Model.ApplicationUser.Id">
+        @Html.Image(Model.Avatar.Content, new { @class = "avatar-big" })
+    </a>
+    @Html.DisplayFor(m => m.DisplayName)
+</h1>
 <p>@Html.DisplayFor(m => m.Bio)</p>
 @if (ViewBag.isCurrentUser == true)
 {
     <a href="~/UserInfo/Edit">Edit my info</a>
 }
-
-@foreach (var item in posts)
-{
-    <hr />
-    <article>
-        <p>@Html.DisplayFor(modelItem => item.TimeFromNow)</p>
-        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
-        <div class="postContent">@Html.Raw(item.Render)</div>
-    </article>
-}
+<hr />
+<h3>Post by this user:</h3>
+@Html.Partial("_RenderPartial", Model.ApplicationUser.Posts)

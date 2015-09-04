@@ -6,7 +6,7 @@
 @Html.Partial("_GreeterPartial")
 
 <div class="postsContent">
-    <h1>Newest Posts</h1>
+    <h1>Latest Posts</h1>
     <div class="postsPartial">
         @* Posts are loaded here via AJAX *@
     </div>
@@ -16,6 +16,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="~/Scripts/RenderPostsAjax.js"></script>
     <script type="text/javascript" src="~/Scripts/frontPage.js"></script>
 }

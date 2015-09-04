@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MVCBlogDemo.Models.Post>
+
+@foreach (var post in Model)
+{
+    <div class="postBlock">
+        <hr />
+        <article class="post post-preview">
+            <p>
+                <a href="~/User/Profile/@post.Author.Id">
+                    @Html.Image(post.Author.UserInfo.Avatar.Content, new { @class = "avatar" })
+                </a>
+                @Html.ActionLink(@post.Author.UserInfo.DisplayName, "Profile", "User", new { id = @post.Author.Id }, null) ,
+                @post.TimeFromNow
+            </p>
+            <a href="~/Posts/View/@post.Id">
+                <h2 class="postTitle">@Html.DisplayFor(modelpost => post.Title)</h2>
+                <div class="postContent">@Html.Raw(post.RenderPreview)</div>
+            </a>
+        </article>
+        <div class="flex-hugsides">
+            <div>
+                <a class="readMore" href="~/Posts/View/@post.Id">Full post</a>
+                @Html.Partial("_EditDeletePartial", post)
+            </div>
+            @Html.Partial("_FavouritePartial", post)
+        </div>
+    </div>
+}

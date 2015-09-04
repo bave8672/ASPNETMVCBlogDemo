@@ -1,0 +1,22 @@
+﻿@model MVCBlogDemo.Models.Post
+
+<div class="favouritePartial" id="@Model.Id">
+
+    @Html.Hidden("getFavouritePath", @Url.Action("HandleFavourite", "Posts"))
+
+    <div class="favouriteButton">
+        @{
+            if (Model.Favourites.Where(f => f.User.ApplicationUser.UserName == User.Identity.Name).Any())
+            {
+                <span class="glyphicon glyphicon-heart"></span>
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-heart-empty"></span>
+            }
+        }
+    </div>
+    <span class="favouritesCount">@Model.Favourites.Count</span>
+</div>
+
+@Scripts.Render("~/Scripts/Favourites.js")

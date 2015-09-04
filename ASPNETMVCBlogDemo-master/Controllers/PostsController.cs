@@ -27,6 +27,7 @@ namespace MVCBlogDemo.Controllers
         }
 
         // GET: Posts
+        [Authorize(Roles="Admin")]
         public async Task<ActionResult> Index()
         {
             return View(await db.Posts.ToListAsync());
@@ -43,6 +44,7 @@ namespace MVCBlogDemo.Controllers
             }
             Post post = await db.Posts
                 .Include(p => p.Tags)
+                .Include(p => p.Favourites.Select(f => f.User.ApplicationUser))
                 .Include(p => p.Author)
                 .Include(p => p.Author.UserInfo)
                 .Include(p => p.Author.UserInfo.Avatar)
@@ -54,6 +56,7 @@ namespace MVCBlogDemo.Controllers
             return View(post);
         }
         // GET: Posts/Details/5
+        [Authorize(Roles="Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -82,25 +85,15 @@ namespace MVCBlogDemo.Controllers
         public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content,Tags")] Post post, string tagString)
         {
             var currentUser = await userManager.FindByIdAsync(User.Identity.GetUserId());
+            post.Author = currentUser;
 
             if (ModelState.IsValid)
             {
                 post.Tags = new List<Tag>();
-                // Add tags
-                if (!String.IsNullOrEmpty(tagString))
-                {
-                    string[] _tags = Regex.Split(tagString, @"[^\w]+");
-                    var uniqTags = new List<string>();
-                    foreach(string tag in _tags)
-                    {
-                        if (!uniqTags.Contains(tag))
-                        {
-                            uniqTags.Add(tag);
-                            post.Tags.Add(new Tag { Name = tag, Post = post });
-                        }
-                    }
-                }
-                post.Author = currentUser;
+                AddTags(post, tagString);
+                post.Title = !String.IsNullOrEmpty(post.Title) ? post.Title : "";
+                post.Content = !String.IsNullOrEmpty(post.Content) ? post.Content : "";
+                post.Favourites = new List<Favourite>();
                 post.Date = System.DateTime.UtcNow;
                 db.Posts.Add(post);
                 await db.SaveChangesAsync();
@@ -110,6 +103,28 @@ namespace MVCBlogDemo.Controllers
             return View(post);
         }
 
+        // Recreates and adds tags to post from posted string
+        private void AddTags(Post post, string tagString)
+        {
+            if (!String.IsNullOrEmpty(tagString))
+            {
+                string[] _tags = Regex.Split(tagString, @"[^\w]+");
+                var uniqTags = new List<string>();
+                foreach (Tag tag in post.Tags)
+                {
+                    post.Tags.Remove(tag);
+                }
+                foreach (string tag in _tags)
+                {
+                    if (!uniqTags.Contains(tag))
+                    {
+                        uniqTags.Add(tag);
+                        post.Tags.Add(new Tag { Name = tag, Post = post });
+                    }
+                }
+            }
+        }
+
         // GET: Posts/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
@@ -117,7 +132,11 @@ namespace MVCBlogDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = await db.Posts.FindAsync(id);
+            Post post = await db.Posts
+                .Include(p => p.Tags)
+                .Include(p => p.Author)
+                .Where(p => p.Id == id)
+                .FirstAsync();
             if (post == null)
             {
                 return HttpNotFound();
@@ -130,15 +149,18 @@ namespace MVCBlogDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content,Date")] Post post)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content,Tags")] Post post, string tagString)
         {
             if (ModelState.IsValid)
             {
+                AddTags(post, tagString);
+                post.Title = !String.IsNullOrEmpty(post.Title) ? post.Title : "";
+                post.Content = !String.IsNullOrEmpty(post.Content) ? post.Content : "";
                 db.Entry(post).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(post);
+            return RedirectToAction("View", new { id = post.Id });
         }
 
         // GET: Posts/Delete/5
@@ -167,6 +189,55 @@ namespace MVCBlogDemo.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public void Test(int? id)
+        {
+            if (id == null)
+            {
+                return;
+            }
+            Post post = db.Posts
+                .Include(p => p.Author)
+                .Where(p => p.Id == id)
+                .FirstOrDefault();
+            if (post == null)
+            {
+                return;
+            }
+            if (post.Author.Id != User.Identity.GetUserId())
+            {
+                return;
+            }
+            db.Posts.Remove(post);
+            db.SaveChanges();
+            return;
+        }
+
+        [HttpPost]
+        public void DeletePost(int? id)
+        {
+            if (id == null)
+            {
+                return;
+            }
+            Post post = db.Posts
+                .Include(p => p.Author)
+                .Where(p => p.Id == id)
+                .FirstOrDefault();
+            if (post == null)
+            {
+                return;
+            }
+            if (post.Author.Id != User.Identity.GetUserId())
+            {
+                return;
+            }
+            db.Posts.Remove(post);
+            db.SaveChanges();
+            return;
+        }
+
         // Partial view for the front page
         [AllowAnonymous]
         public ActionResult RenderPartial(int offset)
@@ -179,6 +250,7 @@ namespace MVCBlogDemo.Controllers
         private List<Post> getNewPosts(int ofs)
         { 
             var posts = db.Posts
+                .Include(post => post.Favourites.Select(f => f.User.ApplicationUser))
                 .Include(post => post.Author)
                 .Include(post => post.Author.UserInfo)
                 .Include(post => post.Author.UserInfo.Avatar)
@@ -187,6 +259,39 @@ namespace MVCBlogDemo.Controllers
                 .Take(5) // Take 5 posts each time
                 .ToList();
             return posts;
+        }
+
+        [HttpPost]
+        public void HandleFavourite(int postId, bool favouriting)
+        {
+            Post post = db.Posts
+                .Include(p => p.Favourites.Select(f => f.User.ApplicationUser))
+                .Where(p => p.Id == postId).First();
+            string userId = User.Identity.GetUserId();
+            var user = db.Users
+                .Include(u => u.UserInfo)
+                .Where(u => u.Id == userId).First();
+
+            // Favouriting
+            if (favouriting)
+            {
+                // Just in case post somehow has no favourites
+                if (post.Favourites == null)
+                {
+                    post.Favourites = new List<Favourite>();
+                }
+                Favourite newFavourite = new Favourite { Post = post, User = user.UserInfo };
+                post.Favourites.Add(newFavourite);
+            }
+
+            // Unfavouriting
+            else if (post.Favourites != null && post.Favourites.Where(f => f.User == user.UserInfo).First() != null)
+            {
+                Favourite favourite = post.Favourites.Where(f => f.User == user.UserInfo).First();
+                db.Favourites.Remove(favourite);
+            }
+
+            db.SaveChanges();
         }
 
         protected override void Dispose(bool disposing)

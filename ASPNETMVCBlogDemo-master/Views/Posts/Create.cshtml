@@ -28,7 +28,7 @@
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Content, new { @class = "mdInput", @rows = "20", @cols = "80" })
                 @Html.ValidationMessageFor(model => model.Content)
-                Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images">Markdown</a>
+                Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images" target="_blank">Markdown</a>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="control-label col-md-2">
-            Preview
+            <span class="bold">Preview:</span>
         </div>
         <div class="col-md-10">
             <h1 class="titleOutput"></h1>

@@ -34,8 +34,9 @@ namespace MVCBlogDemo.Controllers
             }
             var userInfo = db.ApplicationUserInfoes
                 .Include(info => info.ApplicationUser)
-                .Include(info => info.ApplicationUser.Posts)
+                .Include(info => info.ApplicationUser.Posts.Select(p => p.Favourites.Select(f => f.User.ApplicationUser)))
                 .Include(info => info.Avatar)
+                .Include(info => info.Favourites.Select(f => f.User))
                 .Where(info => info.ApplicationUser.Id == id)
                 .FirstOrDefault();
 

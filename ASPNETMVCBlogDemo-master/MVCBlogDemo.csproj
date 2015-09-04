@@ -166,6 +166,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\ClaimsIdentityFactoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -196,6 +198,42 @@
     <Compile Include="Migrations\201508300045373_tags1.Designer.cs">
       <DependentUpon>201508300045373_tags1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508312358463_Favourites.cs" />
+    <Compile Include="Migrations\201508312358463_Favourites.Designer.cs">
+      <DependentUpon>201508312358463_Favourites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509010858302_titlesRequired.cs" />
+    <Compile Include="Migrations\201509010858302_titlesRequired.Designer.cs">
+      <DependentUpon>201509010858302_titlesRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509011131258_removedredundantidonimages.cs" />
+    <Compile Include="Migrations\201509011131258_removedredundantidonimages.Designer.cs">
+      <DependentUpon>201509011131258_removedredundantidonimages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509011230130_removedredundantidonimages1.cs" />
+    <Compile Include="Migrations\201509011230130_removedredundantidonimages1.Designer.cs">
+      <DependentUpon>201509011230130_removedredundantidonimages1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509020009313_cascadeOnDelete.cs" />
+    <Compile Include="Migrations\201509020009313_cascadeOnDelete.Designer.cs">
+      <DependentUpon>201509020009313_cascadeOnDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509020128460_cascadeDeleteFavourites.cs" />
+    <Compile Include="Migrations\201509020128460_cascadeDeleteFavourites.Designer.cs">
+      <DependentUpon>201509020128460_cascadeDeleteFavourites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509030534434_cascadePostsTags.cs" />
+    <Compile Include="Migrations\201509030534434_cascadePostsTags.Designer.cs">
+      <DependentUpon>201509030534434_cascadePostsTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509040001467_postsCascadeDeleteFavourites.cs" />
+    <Compile Include="Migrations\201509040001467_postsCascadeDeleteFavourites.Designer.cs">
+      <DependentUpon>201509040001467_postsCascadeDeleteFavourites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509040221028_DBSetfavourites.cs" />
+    <Compile Include="Migrations\201509040221028_DBSetfavourites.Designer.cs">
+      <DependentUpon>201509040221028_DBSetfavourites.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -221,9 +259,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Styles\Site.scss" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Favourites.js" />
     <Content Include="Scripts\frontPage.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -245,7 +285,6 @@
     <Content Include="Scripts\mdd_modal_background.png" />
     <Content Include="Scripts\mdd_styles.css" />
     <Content Include="Scripts\mdd_toolbar.png" />
-    <Content Include="Scripts\RenderPostsAjax.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -280,7 +319,7 @@
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
-    <Content Include="Views\Posts\_RenderPartial.cshtml" />
+    <Content Include="Views\Shared\_RenderPartial.cshtml" />
     <Content Include="Views\Home\_GreeterPartial.cshtml" />
     <Content Include="Views\Posts\View.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
@@ -290,6 +329,15 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Posts\_TagsPartial.cshtml" />
     <Content Include="Views\Search\_RelevantPostsPartial.cshtml" />
+    <Content Include="Views\Shared\_FavouritePartial.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\ApplicationUsers\Create.cshtml" />
+    <Content Include="Views\ApplicationUsers\Delete.cshtml" />
+    <Content Include="Views\ApplicationUsers\Details.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\Shared\_EditProfileInfoPartial.cshtml" />
+    <Content Include="Views\Shared\_EditDeletePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -342,6 +390,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508300045373_tags1.resx">
       <DependentUpon>201508300045373_tags1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508312358463_Favourites.resx">
+      <DependentUpon>201508312358463_Favourites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509010858302_titlesRequired.resx">
+      <DependentUpon>201509010858302_titlesRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509011131258_removedredundantidonimages.resx">
+      <DependentUpon>201509011131258_removedredundantidonimages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509011230130_removedredundantidonimages1.resx">
+      <DependentUpon>201509011230130_removedredundantidonimages1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509020009313_cascadeOnDelete.resx">
+      <DependentUpon>201509020009313_cascadeOnDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509020128460_cascadeDeleteFavourites.resx">
+      <DependentUpon>201509020128460_cascadeDeleteFavourites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509030534434_cascadePostsTags.resx">
+      <DependentUpon>201509030534434_cascadePostsTags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509040001467_postsCascadeDeleteFavourites.resx">
+      <DependentUpon>201509040001467_postsCascadeDeleteFavourites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509040221028_DBSetfavourites.resx">
+      <DependentUpon>201509040221028_DBSetfavourites.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
