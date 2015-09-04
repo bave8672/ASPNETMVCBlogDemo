@@ -257,6 +257,32 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\ajax-loader.gif" />
+    <Content Include="Content\Images\android-icon-144x144.png" />
+    <Content Include="Content\Images\android-icon-192x192.png" />
+    <Content Include="Content\Images\android-icon-36x36.png" />
+    <Content Include="Content\Images\android-icon-48x48.png" />
+    <Content Include="Content\Images\android-icon-72x72.png" />
+    <Content Include="Content\Images\android-icon-96x96.png" />
+    <Content Include="Content\Images\apple-icon-114x114.png" />
+    <Content Include="Content\Images\apple-icon-120x120.png" />
+    <Content Include="Content\Images\apple-icon-144x144.png" />
+    <Content Include="Content\Images\apple-icon-152x152.png" />
+    <Content Include="Content\Images\apple-icon-180x180.png" />
+    <Content Include="Content\Images\apple-icon-57x57.png" />
+    <Content Include="Content\Images\apple-icon-60x60.png" />
+    <Content Include="Content\Images\apple-icon-72x72.png" />
+    <Content Include="Content\Images\apple-icon-76x76.png" />
+    <Content Include="Content\Images\apple-icon-precomposed.png" />
+    <Content Include="Content\Images\apple-icon.png" />
+    <Content Include="Content\Images\browserconfig.xml" />
+    <Content Include="Content\Images\favicon-16x16.png" />
+    <Content Include="Content\Images\favicon-32x32.png" />
+    <Content Include="Content\Images\favicon-96x96.png" />
+    <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\ms-icon-144x144.png" />
+    <Content Include="Content\Images\ms-icon-150x150.png" />
+    <Content Include="Content\Images\ms-icon-310x310.png" />
+    <Content Include="Content\Images\ms-icon-70x70.png" />
     <Content Include="Content\Images\user-placeholder.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -269,6 +295,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Styles\Site.scss" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="MVCBLogDemo.azurewebsites.net.PublishSettings" />
+    <Content Include="Content\Images\manifest.json" />
+    <None Include="Properties\PublishProfiles\MVCBLogDemo.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -294,6 +323,7 @@
     <Content Include="Scripts\mdd_modal_background.png" />
     <Content Include="Scripts\mdd_styles.css" />
     <Content Include="Scripts\mdd_toolbar.png" />
+    <Content Include="Scripts\Touch.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -304,7 +334,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -336,7 +368,6 @@
     <Content Include="Views\Search\_RelevantPostsPartial.cshtml" />
     <Content Include="Views\Shared\_FavouritePartial.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\ApplicationUsers\Create.cshtml" />
     <Content Include="Views\ApplicationUsers\Delete.cshtml" />
     <Content Include="Views\ApplicationUsers\Details.cshtml" />
     <Content Include="Views\ApplicationUsers\Edit.cshtml" />
@@ -353,21 +384,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UsersAdmin\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UsersAdmin\Delete.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UsersAdmin\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UsersAdmin\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UsersAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201508280828473_init.resx">

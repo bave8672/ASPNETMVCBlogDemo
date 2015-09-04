@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MVCBlogDemo.Models.Post>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{Html.RenderAction("Greeter");}
+
+
+<div class="postsContent latest">
+    <h1>Latest Posts</h1>
+    <div class="postsPartial">
+        @* Posts are loaded here via AJAX *@
+    </div>
+    <img src="~/Content/Images/ajax-loader.gif" class="ajaxLoader" />
+    <div class="ajaxMessage"></div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/frontPage.js"></script>
+}

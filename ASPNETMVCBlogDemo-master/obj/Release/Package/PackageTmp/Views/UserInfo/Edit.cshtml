@@ -1,0 +1,11 @@
+﻿@model MVCBlogDemo.Models.UserInfoEditModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_EditProfileInfoPartial", Model)
+
+<div>
+    @Html.ActionLink("Cancel", "Index")
+</div>
