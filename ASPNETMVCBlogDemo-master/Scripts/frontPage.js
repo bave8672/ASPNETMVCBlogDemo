@@ -6,7 +6,7 @@ offset = 5;
 window.setTimeout(loadMoreIfScroll, 500);
 
 function loadMoreIfScroll() {
-    if (loading === false && !loadedAll && ($(window).innerHeight() + $(window).scrollTop()) >= $("body").height()) {
+    if (loading === false && !loadedAll && $(window).innerHeight() + $(window).scrollTop() >= $("html").height()) {
         renderPartial(offset, null, ".postsPartial");
         offset += 5;
     }
@@ -22,7 +22,7 @@ function renderPartial(ofs, q, target) {
         dataType: "html",
         success: function (data) {
             loading = false;
-            if (data !== '') {
+            if (/\S/.test(data)) {
                 $(target).html($(target).html() + data); // Data is added
             }
             else {

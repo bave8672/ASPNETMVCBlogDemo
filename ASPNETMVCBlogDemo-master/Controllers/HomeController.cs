@@ -29,6 +29,21 @@ namespace MVCBlogDemo.Controllers
             return View();
         }
 
+        public ActionResult Greeter()
+        {
+            var posts = db.Posts
+                .Include(p => p.Tags)
+                .Include(p => p.Favourites.Select(f => f.User.ApplicationUser))
+                .Include(p => p.Author)
+                .Include(p => p.Author.UserInfo)
+                .Include(p => p.Author.UserInfo.Avatar)
+                .ToList();
+            var ordPosts = posts.
+                OrderByDescending(p => p.Virality)
+                .Take(3);
+            return PartialView("_GreeterPartial", ordPosts);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

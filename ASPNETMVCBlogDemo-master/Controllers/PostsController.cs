@@ -163,7 +163,9 @@ namespace MVCBlogDemo.Controllers
             return RedirectToAction("View", new { id = post.Id });
         }
 
+        // Admin Delete
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -181,37 +183,13 @@ namespace MVCBlogDemo.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Post post = await db.Posts.FindAsync(id);
             db.Posts.Remove(post);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public void Test(int? id)
-        {
-            if (id == null)
-            {
-                return;
-            }
-            Post post = db.Posts
-                .Include(p => p.Author)
-                .Where(p => p.Id == id)
-                .FirstOrDefault();
-            if (post == null)
-            {
-                return;
-            }
-            if (post.Author.Id != User.Identity.GetUserId())
-            {
-                return;
-            }
-            db.Posts.Remove(post);
-            db.SaveChanges();
-            return;
         }
 
         [HttpPost]

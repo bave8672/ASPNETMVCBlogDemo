@@ -1,19 +1,6 @@
-Model
-	- Add date to favourites model - score posts according to  favourites and date
-
-Functionality
-	- Disable liking if user is not logged in
-	- Users can edit/delete own posts
-	- Featured Partial using high scoring posts
-	- Clean up admin pages, provide more nav links back to admin
-	- Admin account sees "Admin" navlink in login 
-	- Favourites partial
-
 Production
 	- Clean up unused views, actions
 	- Change settings for production mode
 	- Host somewhere
 
 Buglist
-	- AJAX on scroll never stops calling on homepage
-	- 

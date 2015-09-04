@@ -6,7 +6,13 @@
 
     <div class="favouriteButton">
         @{
-            if (Model.Favourites.Where(f => f.User.ApplicationUser.UserName == User.Identity.Name).Any())
+            if (!Request.IsAuthenticated) 
+            {
+                <a href="@Url.Action("Login", "Account")">
+                    <span class="glyphicon glyphicon-heart-empty"></span>
+                </a>
+            }
+            else if (Model.Favourites.Where(f => f.User.ApplicationUser.UserName == User.Identity.Name).Any())
             {
                 <span class="glyphicon glyphicon-heart"></span>
             }

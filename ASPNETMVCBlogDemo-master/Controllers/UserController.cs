@@ -42,5 +42,27 @@ namespace MVCBlogDemo.Controllers
 
             return View(userInfo);
         }
+
+        // GET: Favourites
+        public ActionResult Favourites(string id)
+        {
+            ViewBag.isCurrentUser = false;
+            if (String.IsNullOrEmpty(id))
+            {
+                id = User.Identity.GetUserId();
+            }
+            if (id == User.Identity.GetUserId())
+            {
+                ViewBag.isCurrentUser = true;
+            }
+            var posts = db.Posts
+                .Include(p => p.Tags)
+                .Include(p => p.Favourites.Select(f => f.User.ApplicationUser))
+                .Include(p => p.Author)
+                .Include(p => p.Author.UserInfo)
+                .Include(p => p.Author.UserInfo.Avatar)
+                .Where(p => p.Favourites.Any(f => f.User.ApplicationUser.Id == id));
+            return View(posts);
+        }
     }
 }

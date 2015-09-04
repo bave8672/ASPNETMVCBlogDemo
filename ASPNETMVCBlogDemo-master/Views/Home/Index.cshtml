@@ -3,9 +3,10 @@
     ViewBag.Title = "Home Page";
 }
 
-@Html.Partial("_GreeterPartial")
+@{Html.RenderAction("Greeter");}
 
-<div class="postsContent">
+
+<div class="postsContent latest">
     <h1>Latest Posts</h1>
     <div class="postsPartial">
         @* Posts are loaded here via AJAX *@
@@ -15,6 +16,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="~/Scripts/frontPage.js"></script>
 }

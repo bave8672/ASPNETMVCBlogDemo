@@ -159,3 +159,8 @@ C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Deb
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.cascadePostsTags.resources
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.postsCascadeDeleteFavourites.resources
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.DBSetfavourites.resources
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\CsQuery.dll
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\HtmlSanitizer.dll
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\CsQuery.xml
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\HtmlSanitizer.xml
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.infoOptionalUser.resources

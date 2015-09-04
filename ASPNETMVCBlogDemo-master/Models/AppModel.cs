@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.Hosting;
 using System.Reflection;
 using System.IO;
+using Ganss.XSS;
 
 namespace MVCBlogDemo.Models
 {
@@ -101,33 +102,54 @@ namespace MVCBlogDemo.Models
         public ICollection<Tag> Tags { get; set; }
         public ICollection<Favourite> Favourites { get; set; }
         public DateTime Date { get; set; }
-        public string TimeFromNow { get { return MVCBlogDemo.App_Code.Utils.GetTimeSpan(Date); } }
+        public string TimeFromNow { get { return MVCBlogDemo.App_Code.Utils.GetTimeSpan(Date); } } // Pretty reletive time
 
         public ApplicationUser Author { get; set; }
 
+        // Content is sanitized by https://github.com/mganss/HtmlSanitizer
+        // iframes are currently enabled as the lib seems to do a good job of keeping them safe
+        // I wouldn't trust this for production though.
         public string Render
         {
             get
             {
                 var md = new MarkdownDeep.Markdown();
-                return md.Transform(Content);
+                string html = md.Transform(Content);
+                HtmlSanitizer sanitizer = new HtmlSanitizer();
+                sanitizer.AllowedTags.Add("iframe");
+                return sanitizer.Sanitize(html);
             }
         }
 
-        // This method does nothing and needs to be factored out.
+        // Only return a preview of the content
         public string RenderPreview
         {
             get
             {
-                string content = Render;
+                var md = new MarkdownDeep.Markdown();
+                string content = Content;
+                if (content.Length > 200)
+                {
+                    content = content.Substring(0, 200) + "...";
+                }
+                string html = md.Transform(content);
+                HtmlSanitizer sanitizer = new HtmlSanitizer();
+                sanitizer.AllowedTags.Add("iframe");
+                return sanitizer.Sanitize(html);
+            }
+        }
 
-                // I wanted to return only part of the post however this can break the page if the post contains html
-
-                //if (content.Length > 200)
-                //{
-                //    return content.Substring(0, 200) + "...";
-                //}
-                return content;
+        // A rudimentary measure of how popular a post is
+        public double Virality
+        {
+            get
+            {
+                if (Favourites != null)
+                {
+                    TimeSpan age = DateTime.Now - Date;
+                    return (double)Favourites.Count * Math.Exp(-Math.Log(2) * age.TotalDays);
+                }
+                else return 0;
             }
         }
     }
@@ -163,8 +185,8 @@ namespace MVCBlogDemo.Models
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<ApplicationUser>()
-                .HasRequired(u => u.UserInfo)
-                .WithRequiredPrincipal(i => i.ApplicationUser)
+                .HasOptional(u => u.UserInfo)
+                .WithOptionalPrincipal(i => i.ApplicationUser)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ApplicationUserInfo>()
