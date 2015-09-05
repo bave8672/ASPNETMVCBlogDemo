@@ -1,14 +1,19 @@
 namespace MVCBlogDemo.Migrations
 {
     using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using MVCBlogDemo.Models;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Data.Entity.Validation;
-    using System.Linq;
-    using System.Text;
+using Microsoft.AspNet.Identity.EntityFramework;
+using MVCBlogDemo.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Web;
+using System.Web.Hosting;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MVCBlogDemo.Models.ApplicationDbContext>
     {
@@ -48,6 +53,19 @@ namespace MVCBlogDemo.Migrations
 
             // Try and save changes
             SaveChanges(db);
+        }
+
+       // For using mappath inside seed method
+        private string MapPath(string seedFile)
+        {
+            if (HttpContext.Current != null)
+                return HostingEnvironment.MapPath(seedFile);
+
+            var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath;
+            var directoryName = Path.GetDirectoryName(absolutePath);
+            var path = Path.Combine(directoryName, ".." + seedFile.TrimStart('~').Replace('/', '\\'));
+
+            return path;
         }
 
         /// <summary>

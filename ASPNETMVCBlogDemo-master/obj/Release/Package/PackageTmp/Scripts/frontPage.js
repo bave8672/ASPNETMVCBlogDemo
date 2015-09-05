@@ -30,6 +30,7 @@ function renderPartial(ofs, q, target) {
                 $(".ajaxLoader").hide();
                 $(".ajaxMessage").html("<br/>No more posts.");
             } // Every post has been loaded, so stop sending requests
+            touchInit();
         }
     });
 }

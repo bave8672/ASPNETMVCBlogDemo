@@ -1,5 +1,2 @@
 Production
-	- Add to the seed method
-	- Clean up unused views, actions
-	- Change settings for production mode
-	- Host somewhere
+	- Extend the seed method to seed users and posts
