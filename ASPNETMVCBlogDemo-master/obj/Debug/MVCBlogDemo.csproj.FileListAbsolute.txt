@@ -164,3 +164,4 @@ C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\Htm
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\CsQuery.xml
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\HtmlSanitizer.xml
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.infoOptionalUser.resources
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.tagsDB.resources

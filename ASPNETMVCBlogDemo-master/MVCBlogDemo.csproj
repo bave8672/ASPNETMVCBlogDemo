@@ -243,6 +243,10 @@
     <Compile Include="Migrations\201509040645193_infoOptionalUser.Designer.cs">
       <DependentUpon>201509040645193_infoOptionalUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509050225108_tagsDB.cs" />
+    <Compile Include="Migrations\201509050225108_tagsDB.Designer.cs">
+      <DependentUpon>201509050225108_tagsDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -274,8 +278,19 @@
     <Content Include="Content\Images\apple-icon-76x76.png" />
     <Content Include="Content\Images\apple-icon-precomposed.png" />
     <Content Include="Content\Images\apple-icon.png" />
+    <Content Include="Content\Images\apple-touch-icon-114x114.png" />
+    <Content Include="Content\Images\apple-touch-icon-120x120.png" />
+    <Content Include="Content\Images\apple-touch-icon-144x144.png" />
+    <Content Include="Content\Images\apple-touch-icon-152x152.png" />
+    <Content Include="Content\Images\apple-touch-icon-57x57.png" />
+    <Content Include="Content\Images\apple-touch-icon-60x60.png" />
+    <Content Include="Content\Images\apple-touch-icon-72x72.png" />
+    <Content Include="Content\Images\apple-touch-icon-76x76.png" />
     <Content Include="Content\Images\browserconfig.xml" />
+    <Content Include="Content\Images\code.txt" />
+    <Content Include="Content\Images\favicon-128.png" />
     <Content Include="Content\Images\favicon-16x16.png" />
+    <Content Include="Content\Images\favicon-196x196.png" />
     <Content Include="Content\Images\favicon-32x32.png" />
     <Content Include="Content\Images\favicon-96x96.png" />
     <Content Include="Content\Images\favicon.ico" />
@@ -283,6 +298,11 @@
     <Content Include="Content\Images\ms-icon-150x150.png" />
     <Content Include="Content\Images\ms-icon-310x310.png" />
     <Content Include="Content\Images\ms-icon-70x70.png" />
+    <Content Include="Content\Images\mstile-144x144.png" />
+    <Content Include="Content\Images\mstile-150x150.png" />
+    <Content Include="Content\Images\mstile-310x150.png" />
+    <Content Include="Content\Images\mstile-310x310.png" />
+    <Content Include="Content\Images\mstile-70x70.png" />
     <Content Include="Content\Images\user-placeholder.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -429,6 +449,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509040645193_infoOptionalUser.resx">
       <DependentUpon>201509040645193_infoOptionalUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509050225108_tagsDB.resx">
+      <DependentUpon>201509050225108_tagsDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

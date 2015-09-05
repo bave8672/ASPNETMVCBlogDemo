@@ -110,10 +110,11 @@ namespace MVCBlogDemo.Controllers
             {
                 string[] _tags = Regex.Split(tagString, @"[^\w]+");
                 var uniqTags = new List<string>();
-                foreach (Tag tag in post.Tags)
+                foreach(Tag tag in db.Tags.Where(t => t.Post.Id == post.Id).ToList())
                 {
-                    post.Tags.Remove(tag);
+                    db.Tags.Remove(tag);
                 }
+                post.Tags.Clear();
                 foreach (string tag in _tags)
                 {
                     if (!uniqTags.Contains(tag))
@@ -149,16 +150,20 @@ namespace MVCBlogDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content,Tags")] Post post, string tagString)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content,Date")] Post post, string tagString)
         {
             if (ModelState.IsValid)
             {
-                AddTags(post, tagString);
-                post.Title = !String.IsNullOrEmpty(post.Title) ? post.Title : "";
-                post.Content = !String.IsNullOrEmpty(post.Content) ? post.Content : "";
-                db.Entry(post).State = EntityState.Modified;
+                Post edited = await db.Posts
+                    .Include(p => p.Tags)
+                    .Where(p => p.Id == post.Id)
+                    .FirstAsync();
+                AddTags(edited, tagString);
+                edited.Title = !String.IsNullOrEmpty(post.Title) ? post.Title : "";
+                edited.Content = !String.IsNullOrEmpty(post.Content) ? post.Content : "";
+                edited.Date = DateTime.UtcNow;
+                db.Entry(edited).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
             }
             return RedirectToAction("View", new { id = post.Id });
         }

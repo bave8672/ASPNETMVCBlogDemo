@@ -146,7 +146,7 @@ namespace MVCBlogDemo.Models
             {
                 if (Favourites != null)
                 {
-                    TimeSpan age = DateTime.Now - Date;
+                    TimeSpan age = DateTime.UtcNow - Date;
                     return (double)Favourites.Count * Math.Exp(-Math.Log(2) * age.TotalDays);
                 }
                 else return 0;
@@ -182,7 +182,7 @@ namespace MVCBlogDemo.Models
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Posts)
                 .WithRequired(p => p.Author)
-                .WillCascadeOnDelete();
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasOptional(u => u.UserInfo)
@@ -192,22 +192,22 @@ namespace MVCBlogDemo.Models
             modelBuilder.Entity<ApplicationUserInfo>()
                 .HasOptional(i => i.Avatar)
                 .WithOptionalPrincipal(a => a.ApplicationUserInfo)
-                .WillCascadeOnDelete();
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<ApplicationUserInfo>()
                 .HasMany(i => i.Favourites)
                 .WithRequired(f => f.User)
-                .WillCascadeOnDelete();
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Post>()
                 .HasMany(p => p.Tags)
                 .WithRequired(t => t.Post)
-                .WillCascadeOnDelete();
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Post>()
                 .HasMany(p => p.Favourites)
                 .WithRequired(f => f.Post)
-                .WillCascadeOnDelete();
+                .WillCascadeOnDelete(true);
 
             // Change the name of the table to be Users instead of AspNetUsers
             modelBuilder.Entity<IdentityUser>()
@@ -220,5 +220,6 @@ namespace MVCBlogDemo.Models
         public DbSet<ApplicationUserInfo> ApplicationUserInfoes { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }

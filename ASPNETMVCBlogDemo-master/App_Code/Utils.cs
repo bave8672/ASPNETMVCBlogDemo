@@ -11,7 +11,7 @@ namespace MVCBlogDemo.App_Code
         public static string GetTimeSpan(DateTime postDate)
         {
             string stringy = string.Empty;
-            TimeSpan diff = DateTime.Now.Subtract(postDate);
+            TimeSpan diff = DateTime.UtcNow.Subtract(postDate);
             double days = diff.Days;
             double hours = diff.Hours + days * 24;
             double minutes = diff.Minutes + hours * 60;
