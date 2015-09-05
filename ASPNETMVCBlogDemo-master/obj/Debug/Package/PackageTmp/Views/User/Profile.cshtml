@@ -1,0 +1,21 @@
+﻿@model MVCBlogDemo.Models.ApplicationUserInfo
+
+@{
+    ViewBag.Title = "Profile for " + Model.DisplayName;
+    var posts = Model.ApplicationUser.Posts.OrderByDescending(p => p.Date);
+}
+
+<h1>
+    <a href="~/User/Profile/@Model.ApplicationUser.Id">
+        @Html.Image(Model.Avatar.Content, new { @class = "avatar-big" })
+    </a>
+    @Html.DisplayFor(m => m.DisplayName)
+</h1>
+<p>@Html.DisplayFor(m => m.Bio)</p>
+@if (ViewBag.isCurrentUser == true)
+{
+    <a href="~/UserInfo/Edit">Edit my info</a>
+}
+<hr />
+<h3>Posts by this user:</h3>
+@Html.Partial("_RenderPartial", Model.ApplicationUser.Posts)

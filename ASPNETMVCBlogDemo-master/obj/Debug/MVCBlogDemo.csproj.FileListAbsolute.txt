@@ -165,3 +165,4 @@ C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\CsQ
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\HtmlSanitizer.xml
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.infoOptionalUser.resources
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Debug\MVCBlogDemo.Migrations.tagsDB.resources
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\Elmah.dll

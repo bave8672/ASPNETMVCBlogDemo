@@ -67,3 +67,4 @@ C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Rel
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Release\MVCBlogDemo.pdb
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Release\MVCBlogDemo.csprojResolveAssemblyReference.cache
 C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\obj\Release\MVCBlogDemo.Migrations.tagsDB.resources
+C:\Users\Ben\Downloads\ASPNETMVCBlogDemo-master\ASPNETMVCBlogDemo-master\bin\Elmah.dll

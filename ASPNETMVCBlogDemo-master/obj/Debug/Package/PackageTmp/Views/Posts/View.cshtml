@@ -1,0 +1,21 @@
+﻿@model MVCBlogDemo.Models.Post
+@{
+    ViewBag.Title = @Model.Title;
+}
+<div class="postBlock">
+    <br />
+    <article class="post">
+        <p><a href="~/User/Profile/@Model.Author.Id">@Html.Image(Model.Author.UserInfo.Avatar.Content, new { @class = "avatar" }) @Model.Author.UserInfo.DisplayName</a> @Model.TimeFromNow</p>
+        <h1 class="postTitle">@Model.Title</h1>
+        <div class="postContent">@Html.Raw(Model.Render)</div>
+        @Html.Partial("_TagsPartial", Model.Tags)
+        <div class="flex-hugsides">
+            <div class="dummy">
+                @Html.Partial("_EditDeletePartial", Model)
+            </div>
+            @Html.Partial("_FavouritePartial", Model)
+        </div>
+    </article>
+    <hr />
+</div>
+@{ Html.RenderAction("_RelevantPostsPartial", "Search", new { post = Model }); }

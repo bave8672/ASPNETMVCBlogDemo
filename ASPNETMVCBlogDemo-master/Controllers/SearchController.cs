@@ -69,7 +69,7 @@ namespace MVCBlogDemo.Controllers
             // Get all posts
             var allPosts = db.Posts
                 .Include(p => p.Tags)
-                .Include(p => p.Favourites.Select(f => f.User))
+                .Include(p => p.Favourites.Select(f => f.User.ApplicationUser))
                 .Include(p => p.Author)
                 .Include(p => p.Author.UserInfo)
                 .Include(p => p.Author.UserInfo.Avatar)

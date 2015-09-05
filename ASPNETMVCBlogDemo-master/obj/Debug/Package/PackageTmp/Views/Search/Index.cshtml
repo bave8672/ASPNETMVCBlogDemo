@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MVCBlogDemo.Models.Post>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="postsContent">
+    <h1>Search Results</h1>
+    <div class="postsContent">
+        @foreach (var post in Model)
+        {
+            <div class="postBlock">
+                <hr />
+                <article class="post post-preview">
+                    <p>
+                        <a href="~/User/Profile/@post.Author.Id">
+                            @Html.Image(post.Author.UserInfo.Avatar.Content, new { @class = "avatar" })
+                        </a>
+                        @Html.ActionLink(@post.Author.UserInfo.DisplayName, "Profile", "User", new { id = @post.Author.Id }, null) , @Html.DisplayFor(modelpost => post.TimeFromNow)
+                    </p>
+                    <a href="~/Posts/View/@post.Id">
+                        <h2 class="postTitle">@Html.DisplayFor(modelpost => post.Title)</h2>
+                        <div class="postContent">@Html.Raw(post.RenderPreview)</div>
+                    </a>
+                </article>
+                <div class="flex-hugsides">
+                    <div>
+                        <a class="readMore" href="~/Posts/View/@post.Id">Full post</a>
+                        @Html.Partial("_EditDeletePartial", post)
+                    </div>
+                    @Html.Partial("_FavouritePartial", post)
+                </div>
+            </div>
+        }
+    </div>
+
+    <p>No more results.</p>
+
+    <nav>
+        <ul class="pager">
+            <li class="@ViewBag.prevClass">@Html.ActionLink("Previous", "", new { q = ViewBag.q, ofs = Math.Max(0, ViewBag.ofs - 5) })</li>
+            <li class="@ViewBag.nextClass">@Html.ActionLink("Next", "", new { q = ViewBag.q, ofs = ViewBag.ofs + 5 })</li>
+        </ul>
+    </nav>
+</div>

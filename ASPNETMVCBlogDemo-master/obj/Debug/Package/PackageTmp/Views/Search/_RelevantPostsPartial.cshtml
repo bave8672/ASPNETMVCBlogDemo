@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MVCBlogDemo.Models.Post>
+
+<div class="relevantPostsPartial">
+    <h2>More posts like this:</h2>
+    <div class="flex-wrap">
+        @foreach (var post in Model)
+        {
+            <div class="relevantPost">
+                <div class="post post-preview">
+                    <p>@Html.Image(post.Author.UserInfo.Avatar.Content, new { @class = "avatar" }) @Html.ActionLink(@post.Author.UserInfo.DisplayName, "Profile", "User", new { id = @post.Author.Id }, null) , @post.TimeFromNow</p>
+                    <a href="~/Posts/View/@post.Id">
+                        <h3 class="postTitle">@Html.DisplayFor(modelpost => post.Title)</h3>
+                        <div class="postContent">@Html.Raw(post.RenderPreview)</div>
+                    </a>
+                </div>
+                <div class="flex-hugsides">
+                    <a class="readMore" href="~/Posts/View/@post.Id">Full post</a>
+                    @Html.Partial("_FavouritePartial", post)
+                </div>
+                <hr class="hidden-lg hidden-md" />
+            </div>
+        }
+    </div>
+</div>
