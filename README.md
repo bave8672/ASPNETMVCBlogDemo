@@ -1,3 +1,5 @@
+![](http://baves.net.s3-website-ap-southeast-2.amazonaws.com/Images/BlogEasyMockup.png)
+
 # ASP.NET MVC5 Blog Demo
 
 A blogsite demo.
