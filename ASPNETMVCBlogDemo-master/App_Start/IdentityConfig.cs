@@ -13,7 +13,6 @@ using System.Web;
 namespace MVCBlogDemo
 {
     public class MyDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
-    // public class MyDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {

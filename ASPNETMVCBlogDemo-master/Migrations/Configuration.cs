@@ -1,6 +1,4 @@
-namespace MVCBlogDemo.Migrations
-{
-    using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MVCBlogDemo.Models;
 using System;
@@ -14,6 +12,9 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Hosting;
+
+namespace MVCBlogDemo.Migrations
+{
 
     internal sealed class Configuration : DbMigrationsConfiguration<MVCBlogDemo.Models.ApplicationDbContext>
     {

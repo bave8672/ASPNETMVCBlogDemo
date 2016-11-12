@@ -309,7 +309,6 @@
     <Content Include="Content\Images\mstile-310x310.png" />
     <Content Include="Content\Images\mstile-70x70.png" />
     <Content Include="Content\Images\user-placeholder.jpg" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Styles\Site.css">

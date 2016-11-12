@@ -102,7 +102,7 @@ namespace MVCBlogDemo.Models
         public ICollection<Tag> Tags { get; set; }
         public ICollection<Favourite> Favourites { get; set; }
         public DateTime Date { get; set; }
-        public string TimeFromNow { get { return MVCBlogDemo.App_Code.Utils.GetTimeSpan(Date); } } // Pretty reletive time
+        public string TimeFromNow { get { return MVCBlogDemo.App_Code.Utils.GetTimeSpan(Date); } } // Prettified relative time
 
         public ApplicationUser Author { get; set; }
 

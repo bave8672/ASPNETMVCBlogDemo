@@ -245,4 +245,7 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
   display: none; }
 
+.table {
+  table-layout: fixed; }
+
 /*# sourceMappingURL=Site.css.map */
